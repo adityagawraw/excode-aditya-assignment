@@ -3,16 +3,18 @@ import { TfiAngleRight } from "react-icons/tfi";
 import classes from './Category.module.css';
 import Topics from "./components/Topics";
 import TopicsList from "./components/TopicsList";
+import AddTopic from "./components/AddTopic";
 
 const Categories = () => {
   const [categories, setCategories] = useState("all");
+  const [addTopicModal, setAddTopicModal]= useState(false);
 
   const handleCategory = (category) => {
     setCategories(category);
   };
 
   return (
-    <div className="px-2 sml:px-6 py-7">
+    <div className="px-2 sml:px-6 pt-7 pb-4 relative">
       <section>
         <h1 className="text-xl font-bold text-gray-800">Categories</h1>
         <div className="flex items-center justify-between mt-8 flex-wrap gap-y-3">
@@ -68,13 +70,16 @@ const Categories = () => {
               Product
             </button>
           </div>
-          <button className="flex items-center gap-1 place-self-center text-white bg-[#fd5829] px-2 py-2 h-fit">
+          <button
+          onClick={()=>setAddTopicModal(prev=>!prev)}
+          className="flex items-center gap-1 place-self-center text-white bg-[#fd5829] px-2 py-2 h-fit">
             <span className={``}>Add Topics</span>
             <TfiAngleRight className="w-4 h-4 " />
           </button>
         </div>
       </section>
       <TopicsList/>
+      <AddTopic addTopicModal={addTopicModal} setAddTopicModal={setAddTopicModal}/>
     </div>
   );
 };
