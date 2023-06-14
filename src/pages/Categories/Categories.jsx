@@ -4,11 +4,13 @@ import classes from './Category.module.css';
 import Topics from "./components/Topics";
 import TopicsList from "./components/TopicsList";
 import AddTopic from "./components/AddTopic";
+import BlogEditor from "./components/BlogEditor";
 
 const Categories = () => {
   const [categories, setCategories] = useState("all");
   const [addTopicModal, setAddTopicModal]= useState(false);
-
+  const [blogEditorModal, setBlogEditorModal]= useState(false);
+  
   const handleCategory = (category) => {
     setCategories(category);
   };
@@ -78,8 +80,9 @@ const Categories = () => {
           </button>
         </div>
       </section>
-      <TopicsList/>
+      <TopicsList setBlogEditorModal={setBlogEditorModal}/>
       <AddTopic addTopicModal={addTopicModal} setAddTopicModal={setAddTopicModal}/>
+      < BlogEditor blogEditorModal={blogEditorModal} setBlogEditorModal={setBlogEditorModal}/>
     </div>
   );
 };
