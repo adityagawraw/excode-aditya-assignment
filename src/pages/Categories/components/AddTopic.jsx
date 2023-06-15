@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { GrFormClose } from "react-icons/gr";
+import { useDispatch, useSelector } from "react-redux";
+import { addTopics } from "../../../features/topics-Slice";
 
 const categories = ["custom", "icp", "mission", "product"];
 const AddTopic = ({ addTopicModal, setAddTopicModal }) => {
@@ -11,9 +13,20 @@ const AddTopic = ({ addTopicModal, setAddTopicModal }) => {
   });
 
   const [keyword, setKeyword] = useState("");
-  useEffect(() => {
-    console.log(topicData);
-  }, [topicData]);
+
+  const dispatch = useDispatch();
+  
+
+  const handleAddTopics = () => {
+    dispatch(addTopics(topicData));
+    setTopicData({
+      topic: "",
+      category: "",
+      keywords: [],
+    });
+    setAddTopicModal(false);
+  };
+
   if (!addTopicModal) return null;
   return (
     <div className="bg-[#00000010] absolute top-0 left-0 z-10 w-full h-[100vh] flex justify-center items-center">
@@ -82,8 +95,14 @@ const AddTopic = ({ addTopicModal, setAddTopicModal }) => {
                   (index + 1) % 3 == 1 &&
                   `border-[#ffdd75] text-[#ffdd75] bg-[#fdf8e8]`
                 }
-                ${(index+1)%3==2 &&`border-[#5ad8b4] text-[#5ad8b4] bg-[#e5faf5]`}
-                ${(index+1)%3==0 &&`border-[#f28d8c] text-[#f28d8c] bg-[#ffe7e6]`}  rounded px-1 text-sm font-semibold  w-fit`}
+                ${
+                  (index + 1) % 3 == 2 &&
+                  `border-[#5ad8b4] text-[#5ad8b4] bg-[#e5faf5]`
+                }
+                ${
+                  (index + 1) % 3 == 0 &&
+                  `border-[#f28d8c] text-[#f28d8c] bg-[#ffe7e6]`
+                }  rounded px-1 text-sm font-semibold  w-fit`}
               >
                 {element}
                 <button
@@ -102,9 +121,7 @@ const AddTopic = ({ addTopicModal, setAddTopicModal }) => {
         </div>
         <div className="flex justify-center ">
           <button
-            onClick={() => {
-              setAddTopicModal(false);
-            }}
+            onClick={() => handleAddTopics()}
             className="text-white bg-[#fd5829] px-2 pb-1 font-semibold rounded"
           >
             Submit{" "}
