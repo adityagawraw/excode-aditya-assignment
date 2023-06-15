@@ -10,7 +10,7 @@ const Categories = () => {
   const [categories, setCategories] = useState("all");
   const [addTopicModal, setAddTopicModal]= useState(false);
   const [blogEditorModal, setBlogEditorModal]= useState(false);
-  
+
   const handleCategory = (category) => {
     setCategories(category);
   };
@@ -80,7 +80,7 @@ const Categories = () => {
           </button>
         </div>
       </section>
-      <TopicsList setBlogEditorModal={setBlogEditorModal}/>
+      <TopicsList categories={categories} setBlogEditorModal={setBlogEditorModal}/>
       <AddTopic addTopicModal={addTopicModal} setAddTopicModal={setAddTopicModal}/>
       < BlogEditor blogEditorModal={blogEditorModal} setBlogEditorModal={setBlogEditorModal}/>
     </div>
